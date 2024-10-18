@@ -1,0 +1,196 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #fafafa;
+    color: #333;
+}
+
+header, footer {
+    background-color: #f2e6d9;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+nav a {
+    color: #5b4e31;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #e09e45;
+}
+
+main {
+    margin: 20px;
+    flex: 1;
+}
+
+.section-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f2ec;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.section-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+form input[type="text"], 
+form input[type="password"],
+form input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e09e45;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #d48a36;
+}
+
+.contenedor-gato {
+    position: relative;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.contenedor-gato::before,
+.contenedor-gato::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    width: 40px;
+    height: 40px;
+    background-color: #f8f8f8;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.contenedor-gato::before {
+    left: 20px;
+    transform: rotate(-10deg);
+}
+
+.contenedor-gato::after {
+    right: 20px;
+    transform: rotate(10deg);
+}
+
+footer .social-icons {
+    margin-top: 15px;
+}
+
+footer .social-icons a {
+    margin: 0 10px;
+    display: inline-block;
+}
+
+footer .social-icons img {
+    width: 20px;
+    height: 20px;
+}
+
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background-color: #333;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e09e45;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    background-color: #d48a36;
+}
+
+@media (max-width: 768px) {
+    .hero-image {
+        object-fit: contain;
+    }
+
+    .hero-section {
+        height: auto;
+        padding: 20px;
+    }
+
+    header h1 {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    footer .social-icons img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.regresar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>GatiAmigo</title>
+    <link rel="icon" href="./_7e268087-c8a3-4fec-aa29-2052042249e0.jpg">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+        import {
+            getDatabase,
+            ref,
+            set,
+            get,
+            child,
+        } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCI1iTUhJGDkKp3MO9jBQhjZ1QxkICW2tU",
+            authDomain: "gatidispensador.firebaseapp.com",
+            databaseURL: "https://gatidispensador-default-rtdb.firebaseio.com",
+            projectId: "gatidispensador",
+            storageBucket: "gatidispensador.appspot.com",
+            messagingSenderId: "1062267157601",
+            appId: "1:1062267157601:web:9cd323b126e9c22629be20",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        document.getElementById("register-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const username = document.getElementById("register-username").value;
+            const password = document.getElementById("register-password").value;
+            const userRef = ref(database, "GatidispensadorRegistro/" + username);
+
+            get(userRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    alert("El usuario ya existe");
+                } else {
+                    set(userRef, { username: username, password: password, }).then(() => {
+                        alert("Usuario registrado con éxito");
+                        window.location.reload();
+                    })
+                        .catch((error) => {
+                            console.error("Error al registrar el usuario:", error);
+                        });
+                }
+            })
+                .catch((error) => {
+                    console.error("Error al verificar el usuario:", error);
+                });
+        });
+
+        document.getElementById("login-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const username = document.getElementById("login-username").value;
+            const password = document.getElementById("login-password").value;
+            const userRef = ref(database, "GatidispensadorRegistro/" + username);
+
+            get(userRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const storedData = snapshot.val();
+                    if (storedData.password === password) {
+                        alert("Inicio de sesión exitoso");
+                        localStorage.setItem("loggedInUser", username);
+                        window.location.href = "Horarios.html";
+                    } else {
+                        alert("Contraseña incorrecta");
+                    }
+                } else {
+                    alert("El usuario no existe");
+                }
+            })
+                .catch((error) => {
+                    console.error("Error al iniciar sesión:", error);
+                });
+        });
+
+        window.addEventListener("scroll", function () {
+            const sections = document.querySelectorAll(".section-container");
+            const triggerBottom = window.innerHeight * 0.8;
+
+            sections.forEach((section) => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < triggerBottom) {
+                    section.classList.add("visible");
+                } else {
+                    section.classList.remove("visible");
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>
+                <div class="organización contenedor-gato">GatiAmigo</div>
+            </h1>
+        </div>
+        <nav class="nav-class organización">
+            <a href="#descripcion" class="organización">Descripción</a>
+            <a href="#funcionalidades" class="organización">Funcionalidades</a>
+            <a href="#concientizacion" class="organización">Cuidados</a>
+            <a href="#registro" class="organización">Registro</a>
+            <a href="#inicio-sesion" class="organización">Login</a>
+            <input type="text" placeholder="Buscar..." />
+        </nav>
+    </header>
+
+    <section id="hero" class="hero-section">
+        <img src="cat-kiss.gif" alt="Imagen Destacada del GatiDispensador" class="hero-image" />
+        <div class="hero-content">
+            <h2>GatiAmigo</h2>
+            <p>El cuidado inteligente y a distancia para tu mascota</p>
+            <a href="#registro" class="cta-button">Regístrate Ahora</a>
+        </div>
+    </section>
+
+    <main>
+        <section id="descripcion" class="section-container">
+            <h2>Descripción</h2>
+            <img src="eat.jfif" alt="Dispensador Automático de Comida para Mascotas" class="alt-text" />
+            <p>
+                El Dispensador Automático de Comida para Mascotas es un dispositivo
+                innovador que permite programar y controlar la alimentación de tus
+                mascotas a través de una aplicación móvil y una página web. Este
+                dispositivo asegura que tu mascota reciba la cantidad adecuada de
+                comida en el momento correcto, incluso cuando no estás en casa.
+            </p>
+        </section>
+
+        <section id="funcionalidades" class="section-container">
+            <h2>Funcionalidades</h2>
+            <ul>
+                <li>Programación de horarios de alimentación.</li>
+                <li>Monitoreo remoto a través de una aplicación móvil.</li>
+                <li>Historial de alimentación y alertas por bajo nivel de comida.</li>
+            </ul>
+            <video controls>
+                <source src="funcionalidades.mp4" type="video/mp4" />
+                <track src="subtitulos_funcionalidades.vtt" kind="subtitles" srclang="es" label="Español" />
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </section>
+
+        <section id="concientizacion" class="section-container">
+            <h2>
+                Cuidando a tu Compañero Felino: La Importancia de una Alimentación
+                Regular y Controlada
+            </h2>
+            <p>
+                En la vida acelerada de hoy, es fácil perder la noción del tiempo y
+                olvidarnos de aspectos esenciales del cuidado de nuestras mascotas,
+                como la alimentación. Los gatos, al igual que nosotros, necesitan
+                horarios regulares y controlados para mantener su salud y bienestar.
+                Alimentarlos en momentos erráticos o permitirles comer en exceso puede
+                llevar a problemas de salud como la obesidad, el estrés y enfermedades
+                digestivas. El GatiDispensador no solo automatiza la tarea de
+                alimentar a tu gato, sino que lo hace de una manera que respeta sus
+                necesidades naturales. Programar horarios específicos ayuda a regular
+                su metabolismo y reduce la ansiedad asociada con la alimentación. Así,
+                tu compañero felino se mantendrá feliz, saludable y en forma, y tú
+                tendrás la tranquilidad de saber que estás cuidando de su bienestar,
+                incluso cuando no estés en casa.
+            </p>
+
+            <img src="suspicious-look-suspicious-cat.gif" alt="Dispensador Automático de Comida para Mascotas"
+                class="alt-text" />
+
+        </section>
+
+        <section id="registro" class="section-container">
+            <h2>Registro</h2>
+            <form id="register-form">
+                <input type="text" id="register-username" placeholder="Nombre de Usuario" required /><br /><br />
+                <input type="password" id="register-password" placeholder="Contraseña" required /><br /><br />
+                <button type="submit">Registrarse</button>
+            </form>
+        </section>
+
+        <section id="inicio-sesion" class="section-container">
+            <h2>Inicio de Sesión</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Nombre de Usuario" required /><br /><br />
+                <input type="password" id="login-password" placeholder="Contraseña" required /><br /><br />
+                <button type="submit">Ingresar</button>
+            </form>
+        </section>
+
+        <section id="descargar-app" class="section-container">
+            <h2>Descarga nuestra App Móvil</h2>
+            <p>
+                Obtén la aplicación para controlar el GatiDispensador desde tu móvil.
+            </p>
+            <a href="app-debug.apk" class="boton-descarga">Descargar para Android</a>
+            <a href="./Proceso.html" class="boton-descarga">Descargar para iOS</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contáctanos</h3>
+                <form id="contact-form">
+                    <input type="text" placeholder="Nombre" required /><br /><br />
+                    <input type="email" placeholder="Correo electrónico" required /><br /><br />
+                    <textarea placeholder="Mensaje" required></textarea><br /><br />
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+            <div class="social-icons">
+                <a href="https://es-la.facebook.com/" target="_blank"><img src="facebook-icon.png" alt="Facebook" /></a>
+                <a href="https://twitter.com/" target="_blank"><img src="twitter-icon.png" alt="Twitter" /></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="instagram-icon.png"
+                        alt="Instagram" /></a>
+            </div>
+            <div class="footer-section">
+                <h3>Encuéntranos</h3>
+                <div id="map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.7056045659765!2d-58.625363023492014!3d-34.687378872924526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc6e009a00839%3A0xea85a7917eaf68a9!2sJos%C3%A9%20Bazurco%20521%2C%20B1755BOK%20Rafael%20Castillo%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1725321644055!5m2!1ses-419!2sar"
+                        width="350" height="300" style="border: 0" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Suscríbete a nuestro Newsletter</h3>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Correo electrónico" required /><br /><br />
+                    <button type="submit">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+        <p>© 2024 GatiAmigo. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
