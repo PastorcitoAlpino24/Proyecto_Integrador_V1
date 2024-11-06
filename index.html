@@ -164,7 +164,9 @@
                 Con GatiAmigo, quiero llevarte la tranquilidad de saber que tu gato siempre tendrá su comida a tiempo,
                 donde sea que estés. ¡Gracias por acompañarme en esta primera versión de GatiAmigo!
                 <div class="imagenes">
-                    <img src="raw.gif" alt="Dispensador Automático de Comida para Mascotas" class="alt-text" />
+                    <img src="raw.gif" alt="Dispensador Automático de Comida para Mascotas" class="alt-text" 
+                    srcset="raw.gif 320w, raw.gif 480w, raw.gif 800w "
+                    sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px" />
                 </div>
             </p>
         </section>
@@ -265,7 +267,7 @@
                 <form id="contact-form">
                     <p class="parrafo">¡Su opinión importa! Si tienes alguna sugerencia, necesitas información adicional, o simplemente quieres ser el primero en enterarte cuando salga a la venta, ¡no dudes en escribir! Cada comentario es valioso y me ayuda a seguir mejorando. ¡Gracias por ser parte de este proyecto! 🐾</p>
                     <input type="text" id="contact-name" class="parrafo" placeholder="Escriba su nombre" required /><br /><br />
-                    <input type="email" id="contact-email" class="parrafo" placeholder="Escriba su correo electrónico" required /><br /><br />
+                    <input type="email" id="contact-email" class="parrafo" placeholder="Escriba su correo electrónico si quiere recibir noticias del proyecto"/><br /><br />
                     <textarea id="contact-message" class="parrafo" placeholder="Deje su mensaje" required></textarea><br /><br />
                     <button type="submit">Enviar</button>
                 </form>
