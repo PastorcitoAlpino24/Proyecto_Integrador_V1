@@ -140,6 +140,21 @@ footer .social-icons img {
     height: 20px;
 }
 
+form input[type="email"],
+form textarea {
+    width: 100%; 
+    padding: 12px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+form textarea {
+    height: 150px; 
+    resize: vertical; 
+}
+
 .hero-section {
     position: relative;
     height: 90vh;

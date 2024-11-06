@@ -9,7 +9,7 @@
     <link rel="icon" sizes="228x228" href="./_7e268087-c8a3-4fec-aa29-2052042249e0.jpg">
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
-        import {getDatabase, ref, set, get, child} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCI1iTUhJGDkKp3MO9jBQhjZ1QxkICW2tU",
@@ -86,6 +86,27 @@
                 }
             });
         });
+
+        document.getElementById("contact-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("contact-name").value;
+            const email = document.getElementById("contact-email").value;
+            const message = document.getElementById("contact-message").value;
+
+            const newContactRef = ref(database, "GatidispensadorContactos/" + Date.now());
+
+            set(newContactRef, {
+                name: name,
+                email: email,
+                message: message,
+            }).then(() => {
+                alert("Mensaje enviado con éxito");
+                document.getElementById("contact-form").reset();
+            }).catch((error) => {
+                console.error("Error al enviar el mensaje:", error);
+            });
+        });
+
     </script>
 </head>
 
@@ -103,6 +124,7 @@
             <a href="#concientizacion" class="organización">Cuidados</a>
             <a href="#registro" class="organización">Registro</a>
             <a href="#inicio-sesion" class="organización">Login</a>
+            <a href="#contact-form" class="organización">Contacto</a>
         </nav>
     </header>
 
@@ -132,7 +154,15 @@
 
         <section id="historia" class="section-container">
             <h2>La Historia de GatiAmigo</h2>
-            <p class="parrafo">GatiAmigo nació como una idea para resolver una necesidad común: asegurar que tu gato reciba su comida a tiempo, incluso cuando no estás en casa. Este primer prototipo es el resultado de meses de trabajo, investigación y aprendizaje, integrando tecnología y cuidado para nuestras mascotas. Durante la creación, enfrenté varios retos, desde conectar correctamente los componentes de Arduino hasta sincronizar la aplicación móvil con el dispositivo a través de internet. Aprendí a programar horarios de alimentación en una base de datos y a diseñar una interfaz intuitiva y amigable, con un toque de estilo gatuno. Cada funcionalidad fue pensada para ofrecerte una experiencia fácil y confiable. Con GatiAmigo, quiero llevarte la tranquilidad de saber que tu gato siempre tendrá su comida a tiempo, donde sea que estés. ¡Gracias por acompañarme en esta primera versión de GatiAmigo!
+            <p class="parrafo">GatiAmigo nació como una idea para resolver una necesidad común: asegurar que tu gato
+                reciba su comida a tiempo, incluso cuando no estás en casa. Este primer prototipo es el resultado de
+                meses de trabajo, investigación y aprendizaje, integrando tecnología y cuidado para nuestras mascotas.
+                Durante la creación, enfrenté varios retos, desde conectar correctamente los componentes de Arduino
+                hasta sincronizar la aplicación móvil con el dispositivo a través de internet. Aprendí a programar
+                horarios de alimentación en una base de datos y a diseñar una interfaz intuitiva y amigable, con un
+                toque de estilo gatuno. Cada funcionalidad fue pensada para ofrecerte una experiencia fácil y confiable.
+                Con GatiAmigo, quiero llevarte la tranquilidad de saber que tu gato siempre tendrá su comida a tiempo,
+                donde sea que estés. ¡Gracias por acompañarme en esta primera versión de GatiAmigo!
             </p>
         </section>
 
@@ -142,7 +172,7 @@
                 <li>Alimentación automática: GatiAmigo dispensa comida para tu gato de manera automática a las horas que elijas.</li>
                 <li>Programación de horarios: Puedes establecer, modificar y eliminar horarios de alimentación fácilmente desde nuestra aplicación o página web.</li>
                 <li>Conexión Wi-Fi: Conecta el dispositivo a internet para sincronizar los horarios en tiempo real, sin necesidad de ajustes manuales.</li>
-                <li>Reloj preciso: Gracias a su reloj interno, GatiAmigo siempre respetará los horarios que establezcas, incluso sin conexión a internet.</li>
+                <li>Reloj preciso: Gracias a su reloj interno, GatiAmigo siempre respetará los horarios que establezcas.</li>
                 <li>Gestión de usuarios: Permite crear cuentas para que cada miembro de la familia pueda gestionar los horarios de alimentación.</li>
                 <li>Control a distancia: Administra todo desde cualquier lugar, ya sea desde tu casa o mientras estás de viaje.</li>
                 <li>Notificaciones (próximamente): Recibirás alertas en tu teléfono cuando GatiDispensador alimente a tu gato.</li>
@@ -177,7 +207,9 @@
                 incluso cuando no estés en casa.
             </p>
             <div class="imagenes">
-                <img src="cat-cat-side-eye.gif" alt="Dispensador Automático de Comida para Mascotas" class="alt-text" srcset="cat-cat-side-eye.gif 320w, cat-cat-side-eye.gif 480w, cat-cat-side-eye.gif 800w " sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px"/>
+                <img src="cat-cat-side-eye.gif" alt="Dispensador Automático de Comida para Mascotas" class="alt-text"
+                    srcset="cat-cat-side-eye.gif 320w, cat-cat-side-eye.gif 480w, cat-cat-side-eye.gif 800w "
+                    sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px" />
             </div>
         </section>
 
@@ -211,10 +243,14 @@
 
         <section id="dedicatoria" class="section-container">
             <h2>Dedicado a Oreo</h2>
-            <p class="parrafo">Este proyecto está inspirado y dedicado a mi querido gato Oreo, quien con su alegría y curiosidad constante me enseñó la importancia de cuidar cada detalle y mantener siempre el bienestar de nuestras mascotas. Gracias, Oreo, por ser la inspiración detrás de GatiAmigo.
+            <p class="parrafo">Este proyecto está inspirado y dedicado a mi querido gato Oreo, quien con su alegría y
+                curiosidad constante me enseñó la importancia de cuidar cada detalle y mantener siempre el bienestar de
+                nuestras mascotas. Gracias, Oreo, por ser la inspiración detrás de GatiAmigo.
             </p>
             <div class="imagenes">
-                <img src="oreo.jfif" alt="Dispensador Automático de Comida para Mascotas" class="alt-text" srcset="oreo.jfif 320w, oreo.jfif 480w, oreo.jfif 800w " sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px"/>
+                <img src="oreo.jfif" alt="Dispensador Automático de Comida para Mascotas" class="alt-text"
+                    srcset="oreo.jfif 320w, oreo.jfif 480w, oreo.jfif 800w "
+                    sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px" />
             </div>
         </section>
     </main>
@@ -224,9 +260,10 @@
             <div class="footer-section">
                 <h3>Contáctanos</h3>
                 <form id="contact-form">
-                    <input type="text" placeholder="Nombre" required /><br /><br />
-                    <input type="email" placeholder="Correo electrónico" required /><br /><br />
-                    <textarea placeholder="Mensaje" required></textarea><br /><br />
+                    <p class="parrafo">¡Su opinión importa! Si tienes alguna sugerencia, necesitas información adicional, o simplemente quieres ser el primero en enterarte cuando salga a la venta, ¡no dudes en escribir! Cada comentario es valioso y me ayuda a seguir mejorando. ¡Gracias por ser parte de este proyecto! 🐾</p>
+                    <input type="text" id="contact-name" class="parrafo" placeholder="Escriba su nombre" required /><br /><br />
+                    <input type="email" id="contact-email" class="parrafo" placeholder="Escriba su correo electrónico" required /><br /><br />
+                    <textarea id="contact-message" class="parrafo" placeholder="Deje su mensaje" required></textarea><br /><br />
                     <button type="submit">Enviar</button>
                 </form>
             </div>
